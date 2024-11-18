@@ -46,7 +46,7 @@ final class ClassTemplateRenderer
             throw new RuntimeException('ReflectionClass::getFileName() returned false');
         }
 
-        $slug = $slug === '' ? ($this->slugGenerator)($reflector) : $slug;
+        $slug = $slug === null ? ($this->slugGenerator)($reflector) : $slug;
         $templateName ??= $this->defaultTemplateName;
         $dirname = dirname($filename);
         $path = trailingslashit(str_replace((string)realpath(get_template_directory()), '', $dirname));
