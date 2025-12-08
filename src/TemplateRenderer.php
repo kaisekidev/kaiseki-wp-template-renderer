@@ -7,7 +7,7 @@ namespace Kaiseki\WordPress\TemplateRenderer;
 use RuntimeException;
 
 use function file_exists;
-use function get_template_directory;
+use function get_stylesheet_directory;
 use function get_template_part;
 use function ob_get_clean;
 use function ob_start;
@@ -33,7 +33,7 @@ final class TemplateRenderer
     ): string {
         $path = trailingslashit($this->templateDirectory);
         $filename = ($name === '' ? $slug . '-' . $name : $slug) . '.php';
-        $absoluteFilePath = trailingslashit(get_template_directory()) . $path . $filename;
+        $absoluteFilePath = trailingslashit(get_stylesheet_directory()) . $path . $filename;
         if (!file_exists($absoluteFilePath)) {
             throw new RuntimeException(
                 sprintf(

@@ -10,7 +10,7 @@ use RuntimeException;
 use function dirname;
 use function file_exists;
 use function get_class;
-use function get_template_directory;
+use function get_stylesheet_directory;
 use function get_template_part;
 use function ob_get_clean;
 use function ob_start;
@@ -49,7 +49,7 @@ final class ClassTemplateRenderer
         $slug = $slug === null ? ($this->slugGenerator)($reflector) : $slug;
         $templateName ??= $this->defaultTemplateName;
         $dirname = dirname($filename);
-        $path = trailingslashit(str_replace((string)realpath(get_template_directory()), '', $dirname));
+        $path = trailingslashit(str_replace((string)realpath(get_stylesheet_directory()), '', $dirname));
 
         $filename = ($templateName === '' ? $slug : $slug . '-' . $templateName) . '.php';
         $absoluteFilePath = trailingslashit($dirname) . $filename;
