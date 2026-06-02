@@ -9,12 +9,11 @@ use Psr\Container\ContainerInterface;
 
 final class TemplateRendererFactory
 {
-    public function __invoke(ContainerInterface $container): ClassTemplateRenderer
+    public function __invoke(ContainerInterface $container): TemplateRenderer
     {
         $config = Config::fromContainer($container);
 
-        return new ClassTemplateRenderer(
-            $container->get(ClassSlugGeneratorInterface::class),
+        return new TemplateRenderer(
             $config->string('template_renderer.template_renderer.template_directory', 'template-parts')
         );
     }

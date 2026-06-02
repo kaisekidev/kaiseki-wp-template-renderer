@@ -27,3 +27,14 @@ First tagged release.
 - Removed the direct `friendsofphp/php-cs-fixer` requirement — the shared coding standard owns it.
 - Added the previously-missing `composer-require-checker` setup (`check-deps` script and
   `require-checker.config.json` whitelisting the WordPress runtime globals the renderers call).
+
+### Fixed
+
+- `TemplateRendererFactory` now returns a `TemplateRenderer` (it previously constructed a
+  `ClassTemplateRenderer`, so resolving `TemplateRenderer::class` from the container yielded the wrong
+  type with an incompatible `render()` signature). The container binding for `TemplateRenderer::class`
+  now works as documented.
+- `TemplateRenderer::render()` now resolves the name variant correctly: a non-empty `$name` produces
+  `<slug>-<name>.php` (e.g. `card-featured.php`), and an empty/omitted name produces `<slug>.php`. The
+  previous ternary was inverted — it ignored a provided name and emitted a trailing dash for an empty
+  one.
