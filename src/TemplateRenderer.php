@@ -32,7 +32,7 @@ final class TemplateRenderer
         ?string $name = null,
     ): string {
         $path = trailingslashit($this->templateDirectory);
-        $filename = ($name === '' ? $slug . '-' . $name : $slug) . '.php';
+        $filename = ($name === null || $name === '' ? $slug : $slug . '-' . $name) . '.php';
         $absoluteFilePath = trailingslashit(get_stylesheet_directory()) . $path . $filename;
         if (!file_exists($absoluteFilePath)) {
             throw new RuntimeException(
